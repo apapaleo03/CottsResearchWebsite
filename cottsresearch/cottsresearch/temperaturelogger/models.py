@@ -7,4 +7,4 @@ class Temperature(TimeStampedModel):
     temp = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return str(self.member) + '--' + self.created.strftime("%Y-%m-%d %H:%M:%S")  + '--'+str(self.temp) + ' F' 
+        return str(self.member) + '--' + self.created.strftime("%Y-%m-%d %H:%M %p")  + '--'+str(self.temp) + ' F' 

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Temperatures{% endblock title %}
+
+{% block content%}
+    <h2>Temperatures</h2>
+
+<ul>
+    {% for temp in temperature_list %}
+        <li><a href="#TODO">{{ temp }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock content%}
