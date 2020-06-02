@@ -2,13 +2,13 @@
 
 {% block title %}Temperatures{% endblock title %}
 
-{% block content%}
+{% block content %}
     <h2>Temperatures</h2>
 
 <ul>
     {% for temp in temperature_list %}
-        <li><a href="#TODO">{{ temp }}</a></li>
+        <li><a href= "{% url 'temperaturelogger:detail' temp.pk %}" >{{ temp }}</a></li>
     {% endfor %}
 </ul>
 
-{% endblock content%}
+{% endblock content %}

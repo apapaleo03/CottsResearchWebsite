@@ -1,0 +1,15 @@
+{% extends 'Base.html' %}
+
+{% block title %}
+    Temperatures: {{ temperature }}
+{% endblock title %}
+
+{% block content %}
+
+<h2>{{ temperature.created }}</h2>
+
+<p>Time Logged: {{temperature.created}}</p>
+<p> Temperature: {{temperature.temp}}</p>
+
+
+{% endblock content %}
