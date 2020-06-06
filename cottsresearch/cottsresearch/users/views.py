@@ -6,6 +6,7 @@ from django.views.generic import (
     RedirectView,
     UpdateView,
 )
+from temperaturelogger.models import Temperature
 
 User = get_user_model()
 

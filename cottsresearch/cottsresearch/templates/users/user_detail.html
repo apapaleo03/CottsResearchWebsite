@@ -26,13 +26,20 @@
   <div class="col-sm-12">
     <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
     <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+    <a class="btn btn-primary" href="{% url 'temperaturelogger:addTemperature' %}" role="button">New Temperature</a>
     <!-- Your Stuff: Custom user template urls -->
   </div>
 
 </div>
 <!-- End Action buttons -->
 {% endif %}
+    <h2>Temperatures</h2>
 
+<ul>
+    {% for temp in temperature_list %}
+        <li><a href= "{% url 'temperaturelogger:detail' temp.pk %}" >{{ temp }}</a></li>
+    {% endfor %}
+</ul>
 
 </div>
 {% endblock content %}
