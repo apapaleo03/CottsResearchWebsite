@@ -6,7 +6,7 @@ from django.views.generic import (
     RedirectView,
     UpdateView,
 )
-from temperaturelogger.models import Temperature
+from cottsresearch.temperaturelogger.models import Temperature
 
 User = get_user_model()
 
@@ -17,6 +17,18 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     #   Lookups by Username
     slug_field = "username"
     slug_url_kwarg = "username"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            templist = list(Temperature.objects.filter(member = self.request.user))
+        except:
+            templist = []
+
+        context['temperaturelist'] =  templist
+        return context
+
+
 
 
 user_detail_view = UserDetailView.as_view()
