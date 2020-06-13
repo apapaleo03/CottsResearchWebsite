@@ -36,18 +36,20 @@
         </button>
         <a class="navbar-brand" href="{% url 'home' %}">CottsResearch</a>
 
+        {% with request.resolver_match.url_name as url_name %}
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             {% if request.user.is_authenticated %}
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            <li {% if url_name == 'home'  %}  class="nav-item active" {% else %} class="nav-item" {% endif %}>
+              <a class="nav-link" href="{% url 'home' %}" {% if url_name == 'home'  %}  class="active" {% endif %}>Home <span class="sr-only">(current)</span></a>
             </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
+            <li {% if url_name == 'about'  %}  class="nav-item active" {% else %} class="nav-item" {% endif %}>
+              <a class="nav-link" href="{% url 'about' %}"  {% if url_name == 'about' %} class="active" {% endif %}>About</a>
             </li>
             {% if request.user.is_authenticated %}
-              <li class="nav-item">
+              <li {% if url_name == 'detail' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
                 {# URL provided by django-allauth/account/urls.py #}
                 <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
               </li>
@@ -55,10 +57,7 @@
                 {# URL provided by django-allauth/account/urls.py #}
                 <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
               </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'temperaturelogger:list'  %}">{% trans "Temperatures" %}</a>
-              </li>
+              
               
             {% else %}
               <li class="nav-item">
@@ -72,6 +71,7 @@
             {% endif %}
           </ul>
         </div>
+        
       </nav>
 
     </div>
@@ -86,8 +86,9 @@
 
       {% block content %}
         <p>Website for Eric Cotts Research Group</p>
+        <p>{{url_name}}</p>
       {% endblock content %}
-
+{% endwith %}
     </div> <!-- /container -->
 
     {% block modal %}{% endblock modal %}

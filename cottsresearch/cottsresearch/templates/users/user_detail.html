@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}User: {{ object.username }}{% endblock %}
+{% block title %}
+  {% if object == request.user %}
+    Hello {{ object.username }}
+  {% else %}
+    Get Lost
+  {% endif %}
+{% endblock %}
 
 {% block content %}
+{% if object == request.user %}
 <div class="container">
 
   <div class="row">
@@ -19,28 +26,32 @@
     </div>
   </div>
 
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
+  
+  <!-- Action buttons -->
+  <div class="row">
 
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <a class="btn btn-primary" href="{% url 'temperaturelogger:addTemperature' %}" role="button">New Temperature</a>
-    <!-- Your Stuff: Custom user template urls -->
+    <div class="col-sm-12">
+      <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
+      <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+      <a class="btn btn-primary" href="{% url 'temperaturelogger:addTemperature' %}" role="button">New Temperature</a>
+      <!-- Your Stuff: Custom user template urls -->
+    </div>
+
   </div>
-
-</div>
-<!-- End Action buttons -->
-{% endif %}
-    <h2>Temperatures</h2>
-
-<ul>
+  <!-- End Action buttons -->
+  
+  <div>
+    <h2>My Temperatures</h2>
+  </div>
+  <ul>
     {% for temp in temperaturelist %}
-        <li><a href= "" > {{temp}} </a></li>
+        <li>{{temp}}</li>
     {% endfor %}
-</ul>
-
+  </ul>
+  
 </div>
+{% else %}
+<h2> If {{object.username}}, please log in. </h2>
+{% endif %}
 {% endblock content %}
 
