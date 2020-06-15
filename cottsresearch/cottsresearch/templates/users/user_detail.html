@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if object == request.user %}
-    Hello {{ object.username }}
+    User: {{ object.username }}
   {% else %}
     Get Lost
   {% endif %}
@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <h2>{{ object.username }}</h2>
+      <h2>Hello {{ object.username }}!</h2>
       {% if object.name %}
         <p>{{ object.name }}</p>
       {% endif %}
@@ -39,15 +39,24 @@
 
   </div>
   <!-- End Action buttons -->
-  
-  <div>
-    <h2>My Temperatures</h2>
+  <hr>
+  <div class=Tlist>
+    <h2>Recent Temperatures</h2>
   </div>
-  <ul>
-    {% for temp in temperaturelist %}
-        <li>{{temp}}</li>
+  <table>
+    {% for temperature in temperaturelist %}
+      <tr>
+        <td>{{temperature.member}}</td>
+        <td>----- {{temperature.created}}</td>
+        <td>----- {{temperature.temp}} F</td>
+      </tr>
     {% endfor %}
-  </ul>
+  </table>
+  <a class="btn btn-primary btn-myTemp" href="{% url 'temperaturelogger:list' %}" role="button">My Temperatures</a>
+  <hr>
+  <div class=Talks>
+  <h2>Upcoming Talks</h2>
+  </div>
   
 </div>
 {% else %}

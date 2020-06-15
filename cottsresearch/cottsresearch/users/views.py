@@ -8,6 +8,7 @@ from django.views.generic import (
 )
 from cottsresearch.temperaturelogger.models import Temperature
 
+
 User = get_user_model()
 
 
@@ -20,12 +21,19 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        try:
-            templist = list(Temperature.objects.filter(member = self.request.user))
-        except:
-            templist = []
+        templist = []
+        
+        member_set = []
+        for mem in list(Temperature.objects.values('member')):
+            member_set.append(mem['member'])
+        member_set = set(member_set)
+        for mem in member_set:
+            temp = Temperature.objects.filter(member = mem).last()
+            templist.append(temp)
+            
 
-        context['temperaturelist'] =  templist
+        context['temperaturelist'] = templist
+        print(templist)
         return context
 
 

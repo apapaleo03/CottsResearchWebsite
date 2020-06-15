@@ -3,12 +3,17 @@
 {% block title %}Temperatures{% endblock title %}
 
 {% block content %}
-    <h2>Temperatures</h2>
+    <h2>My Temperatures</h2>
 
-<ul>
-    {% for temp in temperature_list %}
-        <li><a href= "{% url 'temperaturelogger:detail' temp.pk %}" >{{ temp }}</a></li>
+<table>
+    {% for temperature in temperature_list %}
+        {% if temperature.member == request.user %}
+        <tr>
+            <td>{{ temperature.created }}</td>
+            <td>------ {{ temperature.temp}} F</td>
+        </tr>
+        {% endif %}
     {% endfor %}
-</ul>
+</table>
 
 {% endblock content %}

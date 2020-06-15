@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}CottsResearch{% endblock title %}</title>
+    <title>{% block title %}Cotts Group{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,19 +34,26 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="{% url 'home' %}">CottsResearch</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Cotts Group</a>
 
         {% with request.resolver_match.url_name as url_name %}
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            {% if request.user.is_authenticated %}
             <li {% if url_name == 'home'  %}  class="nav-item active" {% else %} class="nav-item" {% endif %}>
-              <a class="nav-link" href="{% url 'home' %}" {% if url_name == 'home'  %}  class="active" {% endif %}>Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'home' %}" >Home <span class="sr-only">(current)</span></a>
             </li>
-            {% endif %}
             <li {% if url_name == 'about'  %}  class="nav-item active" {% else %} class="nav-item" {% endif %}>
-              <a class="nav-link" href="{% url 'about' %}"  {% if url_name == 'about' %} class="active" {% endif %}>About</a>
+              <a class="nav-link" href="{% url 'about' %}" >About</a>
+            </li>
+            <li {% if url_name == 'research'  %}  class="nav-item active" {% else %} class="nav-item" {% endif %}>
+              <a class="nav-link" href="{% url 'research' %}"  >Research</a>
+            </li>
+            <li {% if url_name == 'publications'  %}  class="nav-item active" {% else %} class="nav-item" {% endif %}>
+              <a class="nav-link" href="{% url 'publications' %}"  >Publications</a>
+            </li>
+            <li {% if url_name == 'people'  %}  class="nav-item active" {% else %} class="nav-item" {% endif %}>
+              <a class="nav-link" href="{% url 'people' %}"  >People</a>
             </li>
             {% if request.user.is_authenticated %}
               <li {% if url_name == 'detail' %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
@@ -86,7 +93,6 @@
 
       {% block content %}
         <p>Website for Eric Cotts Research Group</p>
-        <p>{{url_name}}</p>
       {% endblock content %}
 {% endwith %}
     </div> <!-- /container -->
